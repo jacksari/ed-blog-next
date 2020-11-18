@@ -1,0 +1,11 @@
+.nav{
+    border: 1px solid blue;
+    flex: 0 0 50%;
+    display: flex;
+    justify-content: flex-end;
+
+}
+.link{
+    margin: 0;
+    padding: 0;
+}
