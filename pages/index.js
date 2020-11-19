@@ -1,9 +1,19 @@
 import Head from 'next/head'
 //import styles from '../styles/Home.module.css'
-import Link from "next/link";
-import Header from "../components/Header";
+import fetch from 'node-fetch';
+import Post from "../components/Post";
+export async function getStaticProps(){
+    const resp = await fetch(`${process.env.API_BLOG}/posts`);
+    const posts = await resp.json();
+    return {
+        props: {
+            posts
+        }
+    }
+}
 
-export default function Home() {
+export default function Home({posts}) {
+    //console.log('posts', posts);
   return (
     <div>
       <Head>
@@ -13,8 +23,11 @@ export default function Home() {
         <main>
             <h1>Bienvenidos al Curso de Next</h1>
             <span>Aprendiendo Next</span>
-            <span>{process.env.API_BLOG}</span>
-            <Link href="/nosotros">Nosotros</Link>
+            <div>
+                {
+                    posts.map(p => <Post post={p} key={p.id}/>)
+                }
+            </div>
         </main>
 
 
