@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Link from 'next/link'
 import Head from "next/head";
 import fetch from 'node-fetch';
+import Coments from "../../components/Coments";
 
 
 const PostBlog = ({post}) => (
@@ -16,6 +17,7 @@ const PostBlog = ({post}) => (
                 <h1>{post.title}</h1>
                 <p>{post.body}</p>
             </div>
+            <Coments id={post.id}/>
         </main>
 
     </div>
@@ -23,10 +25,10 @@ const PostBlog = ({post}) => (
 
 PostBlog.getInitialProps = async function(context){
     const { id } = context.query;
-    console.log('id', id);
+    //console.log('id', id);
     const resp = await fetch(`${process.env.API_BLOG}/posts/${id}`);
     const post = await resp.json();
-    console.log('post', post)
+    //console.log('post', post)
     return {
         post
     }
